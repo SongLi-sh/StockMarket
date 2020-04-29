@@ -1,0 +1,26 @@
+a:hover{
+    text-decoration:underline;
+    color:#ffc312;
+}
+.nav-link{
+    font-size:16px;
+    color:white;
+}
+#suggest ul li {
+    padding:3px;
+    font-size: 14px;
+    line-height:25px;
+    cursor: pointer;
+}
+#suggest ul li:hover{
+    text-decoration: underline;
+    background-color: #e5e5e5;
+}
+#search-form{
+    position:relative
+}
+#suggest{
+    position: absolute;
+    top:38px;
+    width:245px;
+}
