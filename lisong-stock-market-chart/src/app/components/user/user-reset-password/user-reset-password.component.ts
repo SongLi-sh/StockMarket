@@ -16,5 +16,7 @@ export class UserResetPasswordComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  reset(){}
+  reset(){
+    this.router.navigateByUrl('user/signin')
+  }
 }
