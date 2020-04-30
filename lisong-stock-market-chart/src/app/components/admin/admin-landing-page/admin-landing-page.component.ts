@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
+import axios from 'axios'
+import { eventNames } from 'cluster'
 
 @Component({
   selector: 'app-admin-landing-page',
@@ -17,70 +19,109 @@ export class AdminLandingPageComponent implements OnInit {
   public ipoCreateShow : boolean = false
   public username : string = ''
 
-  constructor(public router : Router) { }
+  constructor(public router : Router,public activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(
+      params => {
+        this.username = params["username"]
+      }
+    )
   }
+  reSet(){
+    this.companyCreateShow = false
+    this.importExcelShow = false
+    this.uploadSummaryShow = false
+    this.companyListShow = false
+    this.stockExchangeListShow = false
+    this.stockExchangeCreateShow = false
+    this.ipoListShow = false
+    this.ipoCreateShow = false    
+  }
+
   updatePwd(){}
-  logout(){}
+  logout(){
+    axios.post("",{ // the specific url should be ready when microservice is done.
+      username: this.username
+    })
+    .then(
+      (response:any)=>{
+        if(response.data.loginStatus == false){
+          this.router.navigateByUrl('user/signin')
+        }
+    })
+    .catch(
+      error =>{
+        console.log(error)
+      }
+    )
+  }
   profile(){}
-  importDataClick(){}
-  manageCompanyClick(){}
-  manageExchangeClick(){}
-  updateIPODetailsClick(){}
+  importDataClick(){
+      this.reSet()
+      this.importExcelShow = true 
+  }
+  manageCompanyClick(){
+    this.reSet()
+    this.companyListShow=true
+  }
+  manageExchangeClick(){
+    this.reSet()
+    this.stockExchangeListShow=true
+  }
+  updateIPODetailsClick(){
+    this.reSet()
+    this.ipoListShow = true
+  }
   uploadClicked(event){
     if (event) {
-      this.companyCreateShow = false
-      this.importExcelShow = false
+      this.reSet()
       this.uploadSummaryShow = true
-      this.companyListShow = false
-      this.stockExchangeListShow = false
-      this.stockExchangeCreateShow = false
-      this.ipoListShow = false
-      this.ipoCreateShow = false
     }
-
   }
   okClicked(event){
     if (event) {
-      this.companyCreateShow = false
+      this.reSet()
       this.importExcelShow = true
-      this.uploadSummaryShow = false
-      this.companyListShow = false
-      this.stockExchangeListShow = false
-      this.stockExchangeCreateShow = false
-      this.ipoListShow = false
-      this.ipoCreateShow = false
     }
-
   }
   companySaved(event){
     if (event) {
-      this.companyCreateShow = false
-      this.importExcelShow = false
-      this.uploadSummaryShow = false
+      this.reSet()
       this.companyListShow = true
-      this.stockExchangeListShow = false
-      this.stockExchangeCreateShow = false
-      this.ipoListShow = false
-      this.ipoCreateShow = false
+
     }
   }
   createNewCompanyClicked(event){
     if (event) {
+      this.reSet()
       this.companyCreateShow = true
-      this.importExcelShow = false
-      this.uploadSummaryShow = false
-      this.companyListShow = false
-      this.stockExchangeListShow = false
-      this.stockExchangeCreateShow = false
-      this.ipoListShow = false
-      this.ipoCreateShow = false
+
     }
   }
-  newStockExchangeClicked(event){}
-  stockExchangeSaved(event){}
-  createNewIPOClicked(event){}
-  IPOSaved(event){}
+  newStockExchangeClicked(event){
+    if(event){
+      this.reSet()
+      this.stockExchangeCreateShow = true
+    }
+  }
+  stockExchangeSaved(event){
+    if(event){
+      this.reSet()
+      this.stockExchangeListShow = true
+    }
+  }
+  createNewIPOClicked(event){
+    if(event){
+      this.reSet()
+      this.ipoCreateShow = true
+    }
+  }
+  IPOSaved(event){
+    if(event){
+      this.reSet()
+      this.ipoListShow = true
+    }
+  }
   
 }

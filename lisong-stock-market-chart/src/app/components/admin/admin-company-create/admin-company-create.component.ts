@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import axios from 'axios'
 
 @Component({
   selector: 'app-admin-company-create',
@@ -20,6 +21,39 @@ export class AdminCompanyCreateComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  uploadFileChange(event){}
-  save(){}
+  uploadFileChange(event){
+    this.selectedFile = event.target.file[0]
+    var reader = new FileReader()
+
+    reader.onload = (e) => {
+      this.preview = reader.result as string
+      console.log(this.preview)
+    }
+    reader.readAsDataURL(this.selectedFile)
+  }
+  save(){
+    //this suppose to call a microservice service to 
+    //save new company data to data base. the specific url should be ready when microservice is done.
+    axios.post("",{
+     companyName: this.companyName,
+     CEO: this.CEO,
+     boardChairman: this.boardChairman,
+     turnover: this.turnover,
+     sector:this.sector,
+     briefWrteup: this.briefWriteup,
+     logo:btoa(this.preview)
+    })
+    .then(
+      (response:any)=>{
+        if(response.data.data == 'success'){
+          this.companySaved.emit(true)
+        }
+      }
+    )
+    .catch(
+      (error)=>{
+        console.log(error)
+      }
+    )
+  }
 }

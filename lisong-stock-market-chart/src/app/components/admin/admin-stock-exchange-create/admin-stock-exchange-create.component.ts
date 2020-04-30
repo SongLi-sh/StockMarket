@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import axios from 'axios'
 
 @Component({
   selector: 'app-admin-stock-exchange-create',
@@ -17,6 +18,28 @@ export class AdminStockExchangeCreateComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  save(){}
+  save(){
+    axios.post(
+      "",// the specific url should be ready when microservice is ready.
+      {
+        stockExchangeName: this.stockExchangeName,
+        stockExchangeBrief: this.stockExchangeBrief,
+        stockExhangeAddress: this.stockExhangeAddress,
+        stockExchangeRemarks: this.stockExchangeRemarks
+      }
+    )
+    .then(
+      (response:any)=>{
+        if(response.data.data == 'success'){
+          this.stockExchangeSaved.emit(true)
+        }
+      }
+    )
+    .catch(
+      (error)=>{
+        console.log(error)
+      }
+    )
+  }
   
 }

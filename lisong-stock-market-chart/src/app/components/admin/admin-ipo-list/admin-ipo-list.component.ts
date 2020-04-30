@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import Axios from 'axios';
 
 @Component({
   selector: 'app-admin-ipo-list',
@@ -12,6 +13,19 @@ export class AdminIpoListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    Axios.get("")//the specific url should be ready when its corresponding microservice is done
+    .then(
+      (response:any)=>{
+       this.ipoList = response.data.ipoList
+      }
+    )
+    .catch(
+      (error)=>{
+        console.log(error)
+      }
+    )
   }
-  createNewIPO(){}
+  createNewIPO(){
+    this.createNewIPOClicked.emit(true)
+  }
 }

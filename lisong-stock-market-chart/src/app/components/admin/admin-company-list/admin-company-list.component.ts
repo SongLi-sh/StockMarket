@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import axios from 'axios'
+
 
 @Component({
   selector: 'app-admin-company-list',
@@ -13,6 +15,29 @@ export class AdminCompanyListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    //it should call a microservice url to get all the existing companies.
+    //that microserice should be scope other than mile stone 2.
+  axios.get("")
+  .then(
+    (response : any) => {
+      for (let json of response.data.companies){
+        let tmpJson = {
+          companyName: json.companyName,
+          briefWriteup: json.briefWriteup,
+          logo:atob(json.logo)
+        }
+        this.companyList.push(tmpJson)
+      }
+    }
+  )
+  .catch(
+    (error)=>{
+      console.log(error)
+    }
+  )
+
   }
-  createNewCompany(){}
+  createNewCompany(){
+    this.createNewCompanyClicked.emit(true)
+  }
 }
