@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 
 import * as $ from 'jquery';
+import axios from 'axios'
+import { EncryptService } from 'src/app/services/encrypt.service';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-signin',
