@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import axios from 'axios'
 
 @Component({
   selector: 'app-user-ipo-list',
@@ -10,6 +11,15 @@ export class UserIpoListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    axios.get("")//the specific url of backend should be ready when microservice part is done
+    .then((response:any)=>{
+      this.ipoList = response.data.ipoList
+    })
+    .catch(
+      (error)=>{
+        console.log(error)
+      }
+    )
   }
 
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import * as $ from 'jquery'
+import {ActivatedRoute} from '@angular/router'
+import Axios from 'axios';
 
 @Component({
   selector: 'app-submit-password',
@@ -13,18 +15,31 @@ export class SubmitPasswordComponent implements OnInit {
   public password : string = ''
   public password2: string = ''
   public isPolicyAgreed : boolean = false
+  public signupDisabled : boolean = true
 
-  constructor(public router : Router) { }
+  constructor(public router : Router,public activateRouter: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activateRouter.queryParams.subscribe(
+      (params:any)=>{
+        this.username = params['username']
+      }
+    )
   }
   signup() {
     if (this.isPolicyAgreed && this.password == this.password2) {
-      alert('You just registered a new accout ! Please sign in !')
-      this.router.navigateByUrl('user/signin')
+      Axios.post("",{
+        username: this.username,
+        password: this.password
+      })//the specific url should be ready when microservice part is done.
+      .then(
+        (response:any)=>{
+          this.router.navigateByUrl('user/signup')
+        }
+      )
     } else {
       var regWarning = $('#regWarning')
-      regWarning.addClass()
+      regWarning.addClass('fa fa-times')
       regWarning.text('password is not same')
       regWarning.css('color','red')
     }

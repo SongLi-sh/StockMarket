@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router'
-import { R3ConstructorFactoryMetadata } from '@angular/compiler/src/render3/r3_factory';
+import { Router, ActivatedRoute} from '@angular/router'
+import axios from 'axios'
+
 
 @Component({
   selector: 'app-user-profile',
@@ -12,11 +13,49 @@ export class UserProfileComponent implements OnInit {
   public contactNo : string = ''
   
 
-  constructor(public router : Router) { }
-
-  ngOnInit(): void {
+  constructor(public router : Router, public activatedRoute : ActivatedRoute) { }
+  ngOnInit():void{
+    this.activatedRoute.queryParams.subscribe(
+    (params)=>{
+      this.username = params['username']
+      }
+    )
   }
-  cancel(){}
-  update(){}
+  update(){
+    //the specific url of backend should be ready when microservice part is done
+    axios.put("",{
+      username: this.username,
+      contactNo: this.contactNo
+    })
+    .then(
+      (response:any)=>{
+        if(response.data.contactNo){
+          this.router.navigateByUrl(this.router.createUrlTree(
+            ['user/land'],{
+              queryParams:{
+                username:this.username
+              }
+            }
+          ))
+        }
+      }
+    )
+    .catch(
+      (error)=>{
+        console.log(error)
+      }
+    )
+  }
+  cancel(){
+    this.router.navigateByUrl(
+      this.router.createUrlTree(
+        ['user/land'],{
+          queryParams:{
+            username:this.username
+          }
+        }
+      )
+    )
+  }
 
 }

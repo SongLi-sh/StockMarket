@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { Router,ActivatedRoute } from '@angular/router';
+import axios from 'axios'
 
 @Component({
   selector: 'app-user-landing-page',
@@ -19,12 +19,33 @@ export class UserLandingPageComponent implements OnInit {
   public companyOrSector : string = ''
   public compareChartsShow : boolean = false
   public ipoShow : boolean = false
+  public searchTxtReadonly: boolean = false
 
-  constructor(public router : Router) { }
+  constructor(public router : Router,public activatedRoute, ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(
+      (params)=>{
+        this.username = params['username']
+      }
+    )
   }
-  companySearch(){}
+  companySearch(){
+    axios.post("",//the specific url of backend should be ready when microservice part is done
+    {
+      companySearchText: this.companySearchText
+    })
+    .then(
+      (response:any)=>{
+        this.searchResults = response.data.companies
+      }
+    )
+    .catch(
+      (error)=>{
+        console.log(error)
+      }
+    )
+  }
   updatePwd(){
     this.router.navigateByUrl(
       this.router.createUrlTree(
@@ -32,7 +53,24 @@ export class UserLandingPageComponent implements OnInit {
       )
     )   
   }
-  logout(){}
+  logout(){
+    //the specific url of backend should be ready when microservice part is done
+    axios.post("",{
+      username:this.username
+    })
+    .then(
+      (response:any)=>{
+        if(response.data.loginStatus){
+          this.router.navigateByUrl('user/signin')
+        }
+      }
+    )
+    .catch(
+      (error)=>{
+        console.log(error)
+      }
+    )
+  }
   profile(){
     this.router.navigateByUrl(
       this.router.createUrlTree(
@@ -41,11 +79,40 @@ export class UserLandingPageComponent implements OnInit {
       )
   }
   IPOSClick(){
+    this.searchTxtReadonly = true
+    this.searchDisabled = true
+    this.companyListShow = false
+    this.compareChartsShow = false
     this.ipoShow = true
   }
-  compareCompanyClick(){}
-  compareSectorClick(){}
-  companyListClick(){}
-  promptClick(key){}
+  compareCompanyClick(){
+    this.compareChartsShow = true
+    this.searchTxtReadonly = true
+    this.searchDisabled = true
+    this.companyListShow = false
+    this.companyOrSector = 'Company'
+    this.ipoShow = false
+  }
+  compareSectorClick(){
+    this.compareChartsShow = true
+    this.searchTxtReadonly = true
+    this.searchDisabled = true
+    this.companyListShow = false
+    this.companyOrSector = 'Sector'
+    this.ipoShow = false
+  }
+  companyListClick(){
+    this.searchTxtReadonly = false
+    this.searchDisabled = false
+    this.companyListShow = true
+    this.compareChartsShow = false
+    this.ipoShow = false 
+  }
+  promptClick(key){
+    this.companySearchText = this.suggestResults[key].companyName
+    this.companySearch()
+    this.promptShow = false
+
+  }
   
 }
