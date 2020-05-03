@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import axios from 'axios'
 
+
 @Component({
   selector: 'app-user-comparison-charts',
   templateUrl: './user-comparison-charts.component.html',
@@ -60,6 +61,7 @@ export class UserComparisonChartsComponent implements OnInit {
     this.addDisabled = false
     this.backgroundColor = 'white'
     var main = document.getElementById('main') as HTMLDivElement
+
     this.myChart = echarts.init(main)
 
     axios.post("",{//the specific url of backend should be ready when microservice part is done

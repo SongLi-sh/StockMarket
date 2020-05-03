@@ -1,7 +1,5 @@
 import { Component, OnInit,Output, EventEmitter } from '@angular/core';
 import axios from 'axios'
-import { AnyPtrRecord } from 'dns';
-
 
 @Component({
   selector: 'app-admin-upload-summary',

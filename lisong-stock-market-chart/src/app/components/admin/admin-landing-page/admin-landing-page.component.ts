@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import axios from 'axios'
-import { eventNames } from 'cluster'
 
 @Component({
   selector: 'app-admin-landing-page',

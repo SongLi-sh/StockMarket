@@ -21,7 +21,7 @@ export class UserLandingPageComponent implements OnInit {
   public ipoShow : boolean = false
   public searchTxtReadonly: boolean = false
 
-  constructor(public router : Router,public activatedRoute, ActivatedRoute) { }
+  constructor(public router : Router,public activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(
