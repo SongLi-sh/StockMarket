@@ -13,9 +13,6 @@ public class CommonResult<T> {
     private String msg;
     private T data;
 
-    public CommonResult(long code, String msg, T data) {
-    }
-
     public static <T> CommonResult<T> success(T data){
         return new CommonResult<T>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMsg(), data);
     }
