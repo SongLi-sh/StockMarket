@@ -13,6 +13,7 @@
   <groupId>IBM</groupId>
   <artifactId>stock-market-chart-eureka</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
   <name>stock-market-chart-eureka</name>
   <!-- FIXME change it to the project's website -->
@@ -41,7 +42,7 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-autoconfigure</artifactId>
-      <version>2.2.6.RELEASE</version>
+      <version>2.1.6.RELEASE</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
@@ -49,6 +50,13 @@
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <configuration>
+            <mainClass>IBM.EurekaApplication</mainClass>
+          </configuration>
+        </plugin>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
