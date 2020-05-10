@@ -8,7 +8,7 @@ import java.sql.Time;
 import java.sql.Date;
 import java.util.List;
 
-public interface IStockPriceDetail {
+public interface IStockPriceDetailService {
 
     List<StockPriceDetail> getStockPriceDetails(String companyName, String stockExchange,
                                                 Date startDate,
