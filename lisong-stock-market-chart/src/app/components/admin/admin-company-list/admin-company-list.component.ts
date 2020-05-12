@@ -15,9 +15,7 @@ export class AdminCompanyListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    //it should call a microservice url to get all the existing companies.
-    //that microserice should be scope other than mile stone 2.
-  axios.get("")
+  axios.get('http://localhost:7002/company/list')
   .then(
     (response : any) => {
       for (let json of response.data.companies){

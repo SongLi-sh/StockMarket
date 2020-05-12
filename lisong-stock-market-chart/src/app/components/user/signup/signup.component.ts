@@ -30,7 +30,8 @@ export class SignupComponent implements OnInit {
 
   submit(){
     if(this.emailValidationService.emailValidation(this.username)){
-      axios.post('', { //the specific url of validation should be ready when microservice part is done.
+      axios.post('http://localhost:7001/user/veri/code/', 
+      {
         username: this.username
       })
       .then(

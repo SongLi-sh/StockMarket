@@ -40,7 +40,7 @@ export class AdminLandingPageComponent implements OnInit {
 
   updatePwd(){}
   logout(){
-    axios.post("",{ // the specific url should be ready when microservice is done.
+    axios.post("http://localhost:7001/user/logout/",{
       username: this.username
     })
     .then(

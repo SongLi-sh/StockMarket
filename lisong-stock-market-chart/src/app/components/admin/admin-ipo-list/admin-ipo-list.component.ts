@@ -13,7 +13,7 @@ export class AdminIpoListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    Axios.get("")//the specific url should be ready when its corresponding microservice is done
+    Axios.get('http://localhost:7002/company/IPOlist')
     .then(
       (response:any)=>{
        this.ipoList = response.data.ipoList

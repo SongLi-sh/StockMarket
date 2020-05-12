@@ -27,7 +27,7 @@ export class AdminImportExcelComponent implements OnInit {
   var formData = new FormData()
   formData.append('file', this.selectedFile)
   axios.post(
-    '', //the specific url should be provided by microservice service
+    'http://localhost:7005/excel/import',
     formData,{
     headers:{
       'Content-Type':'multipart/form-data'

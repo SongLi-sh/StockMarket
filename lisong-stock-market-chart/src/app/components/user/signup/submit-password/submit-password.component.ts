@@ -28,10 +28,11 @@ export class SubmitPasswordComponent implements OnInit {
   }
   signup() {
     if (this.isPolicyAgreed && this.password == this.password2) {
-      Axios.post("",{
+      Axios.post('http://localhost:7001/user/signup/pwd',
+      {
         username: this.username,
         password: this.password
-      })//the specific url should be ready when microservice part is done.
+      })
       .then(
         (response:any)=>{
           this.router.navigateByUrl('user/signup')

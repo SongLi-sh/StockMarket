@@ -20,7 +20,7 @@ export class AdminUploadSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     let companyCode = localStorage.getItem("companyCode")
-    axios.post("",{// the specific url should be ready when microservice is implemented.
+    axios.post('http://localhost:7002/company/name',{
       companyCode:companyCode
     })
     .then(

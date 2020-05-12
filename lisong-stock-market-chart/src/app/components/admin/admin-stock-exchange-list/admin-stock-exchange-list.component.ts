@@ -14,7 +14,7 @@ export class AdminStockExchangeListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    axios.get("")//the specific url should be ready when microservice part is ready.
+    axios.get('http://localhost:7004/stock-exchange/list')
     .then(
       (response:any)=>{
       this.stockExchangeList = response.date.stockExchanges

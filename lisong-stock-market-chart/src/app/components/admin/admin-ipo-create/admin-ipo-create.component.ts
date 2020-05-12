@@ -22,8 +22,7 @@ export class AdminIpoCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.companyList = this.companyList.slice(this.companyList.length + 1)
-    axios.get("")//should call the microservice url for the companies, the specific url should be ready 
-    // when microservice is done.
+    axios.get("http://localhost:7002/company/list")
     .then(
       (response: any) => {
         this.companyList = response.data.companies
@@ -35,8 +34,7 @@ export class AdminIpoCreateComponent implements OnInit {
       }
     )
     this.stockExchangeList = this.stockExchangeList.slice(this.stockExchangeList.length + 1)
-    axios.get("")//should call the microservice url for the stock exchanges, the specific url should be ready
-    // when microservice is done.
+    axios.get("http://localhost:7004/stock-exchange/list")
     .then(
       (response:any) => {
       this.stockExchangeList = response.data.stockExchanges
@@ -59,8 +57,7 @@ export class AdminIpoCreateComponent implements OnInit {
     this.openDateTime = event.target.value
   }
   save(){
-    axios.post("",// should call a miscroservice url to create the IPO data into data base
-    //the specific url should be ready when microservice is done.
+    axios.post('http://localhost:7002/company/IPO',
     {
       companyName: this.companyName,
       stockExchangeName: this.stockExchangeName,

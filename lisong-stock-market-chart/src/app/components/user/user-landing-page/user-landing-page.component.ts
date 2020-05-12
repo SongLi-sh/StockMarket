@@ -31,7 +31,7 @@ export class UserLandingPageComponent implements OnInit {
     )
   }
   companySearch(){
-    axios.post("",//the specific url of backend should be ready when microservice part is done
+    axios.post("http://localhost:7002/company/search",
     {
       companySearchText: this.companySearchText
     })
@@ -53,9 +53,9 @@ export class UserLandingPageComponent implements OnInit {
       )
     )   
   }
+  
   logout(){
-    //the specific url of backend should be ready when microservice part is done
-    axios.post("",{
+    axios.post("http://localhost:7001/user/logout/",{
       username:this.username
     })
     .then(

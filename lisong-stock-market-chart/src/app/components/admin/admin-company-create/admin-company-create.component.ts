@@ -32,9 +32,7 @@ export class AdminCompanyCreateComponent implements OnInit {
     reader.readAsDataURL(this.selectedFile)
   }
   save(){
-    //this suppose to call a microservice service to 
-    //save new company data to data base. the specific url should be ready when microservice is done.
-    axios.post("",{
+    axios.post('http://localhost:7002/company/new',{
      companyName: this.companyName,
      CEO: this.CEO,
      boardChairman: this.boardChairman,

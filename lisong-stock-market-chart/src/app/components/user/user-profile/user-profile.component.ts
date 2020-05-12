@@ -21,9 +21,9 @@ export class UserProfileComponent implements OnInit {
       }
     )
   }
+  
   update(){
-    //the specific url of backend should be ready when microservice part is done
-    axios.put("",{
+    axios.put("http://localhost:7001/user/profile",{
       username: this.username,
       contactNo: this.contactNo
     })

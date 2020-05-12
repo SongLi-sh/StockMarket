@@ -22,7 +22,7 @@ export class UserResetPasswordComponent implements OnInit {
   reset(){
     if(this.newPwd.length > 0 && this.newPwd2.length > 0){
       if(this.newPwd == this.newPwd2){
-        axios.put("", {
+        axios.put("http://localhost:7001/user/pwd/", {
         username: this.username,
         password: this.newPwd
       })

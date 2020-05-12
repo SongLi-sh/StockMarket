@@ -31,7 +31,7 @@ export class UserComparisonChartsComponent implements OnInit {
 
   ngOnInit(): void {
     this.companyList = this.companyList.slice(this.companyList.length+1)
-    axios.get("")//the specific url of backend should be ready when microservice part is done
+    axios.get("http://localhost:7002/company/list")
     .then(
       (response:any)=>{
         this.companyList = response.data.companies
@@ -44,7 +44,7 @@ export class UserComparisonChartsComponent implements OnInit {
     )
 
     this.stockExchangeList= this.stockExchangeList.slice(this.stockExchangeList.length+1)
-    axios.get("")//the specific url of backend should be ready when microservice part is done
+    axios.get("http://localhost:7004/stock-exchange/list")
     .then(
       (response:any)=>{
         this.stockExchangeList = response.data.stockExchanges
@@ -64,7 +64,7 @@ export class UserComparisonChartsComponent implements OnInit {
 
     this.myChart = echarts.init(main)
 
-    axios.post("",{//the specific url of backend should be ready when microservice part is done
+    axios.post("http://localhost:7002/company/compare",{
       compnanyName: this.selectedCompanyName,
       selectedStockExchangeName: this.selectedStockExchangeName,
       fromPeriod: this.fromPeriod,
@@ -148,10 +148,11 @@ export class UserComparisonChartsComponent implements OnInit {
   periodUnitChange(e){
     this.periodUnit = e.target.value
   }
+
   add(){
     this.timeline = this.timeline.slice(this.timeline.length+1)
     this.priceStack = this.priceStack.slice(this.priceStack.length+1)
-    axios.post("",{//the specific url of backend should be ready when microservice part is done
+    axios.post("http://localhost:7002/company/compare",{
       compnanyName: this.selectedCompanyName,
       selectedStockExchangeName: this.selectedStockExchangeName,
       fromPeriod: this.fromPeriod,

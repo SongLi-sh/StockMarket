@@ -11,7 +11,7 @@ export class UserIpoListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    axios.get("")//the specific url of backend should be ready when microservice part is done
+    axios.get("http://localhost:7002/company/IPOlist")
     .then((response:any)=>{
       this.ipoList = response.data.ipoList
     })

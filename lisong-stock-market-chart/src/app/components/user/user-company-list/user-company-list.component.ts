@@ -14,7 +14,7 @@ export class UserCompanyListComponent implements OnInit {
 
   ngOnInit(): void {
     this.companyList = this.companyList.slice(this.companyList.length+1)
-    axios.get("")//specific url should be ready when backed microservice part is done.
+    axios.get("http://localhost:7002/company/list")
     .then(
       (response:any)=>{
         for (let json of response.data.companies){

@@ -20,7 +20,7 @@ export class AdminStockExchangeCreateComponent implements OnInit {
   }
   save(){
     axios.post(
-      "",// the specific url should be ready when microservice is ready.
+      'http://localhost:7004/stock-exchange/new',
       {
         stockExchangeName: this.stockExchangeName,
         stockExchangeBrief: this.stockExchangeBrief,
