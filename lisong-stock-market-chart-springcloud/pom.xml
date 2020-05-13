@@ -6,6 +6,7 @@
 	<modules>
 		<module>stock-market-chart-eureka</module>
         <module>stock-market-chart-services</module>
+        <module>stock-market-chart-zuul</module>
     </modules>
 
 	<parent>
