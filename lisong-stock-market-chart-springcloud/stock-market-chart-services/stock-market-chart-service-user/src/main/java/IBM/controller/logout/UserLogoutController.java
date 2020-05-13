@@ -5,6 +5,7 @@ import IBM.service.IUserService;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +15,7 @@ public class UserLogoutController {
     @Autowired
     private IUserService userService;
 
+    @PostMapping(value = "/logout")
     public JSONObject userLogout(@RequestBody JSONObject userJson){
         JSONObject retJson = new JSONObject();
         String username = userJson.getString("username");
