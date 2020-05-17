@@ -2,15 +2,13 @@ package IBM.controller;
 
 import IBM.entity.Company;
 import IBM.entity.StockPriceDetail;
-import IBM.service.ICompanyService;
-import IBM.service.IStockPriceDetailService;
-import com.alibaba.fastjson.JSON;
+import IBM.service.impl.CompanyServiceImpl;
+import IBM.service.impl.StockPriceDetailServiceImpl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,14 +21,14 @@ import java.util.List;
 public class CompanyController {
 
     @Autowired
-    private ICompanyService companyService;
+    private CompanyServiceImpl companyServiceImpl;
 
     @Autowired
-    private IStockPriceDetailService stockPriceDetailService;
+    private StockPriceDetailServiceImpl stockPriceDetailServiceImpl;
 
-    public CompanyController(ICompanyService companyServiceImpl, IStockPriceDetailService stockPriceDetailServiceImpl){
-        this.companyService = companyServiceImpl;
-        this.stockPriceDetailService = stockPriceDetailServiceImpl;
+    public CompanyController(CompanyServiceImpl companyServiceImpl, StockPriceDetailServiceImpl stockPriceDetailServiceImpl) {
+        this.companyServiceImpl = companyServiceImpl;
+        this.stockPriceDetailServiceImpl = stockPriceDetailServiceImpl;
     }
 
     @GetMapping(value = "/list")
@@ -38,7 +36,7 @@ public class CompanyController {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
 
-        List<Company> companies = this.companyService.getCompanyList();
+        List<Company> companies = this.companyServiceImpl.getCompanyList();
         for(Company company : companies){
             String logo = company.getLogo();
             String companyName = company.getCompanyName();
@@ -47,7 +45,7 @@ public class CompanyController {
             BigDecimal turnOver = company.getTurnover();
             String sector = company.getSector();
             String briefWriteup = company.getBriefWriteup();
-            BigDecimal currentPrice = stockPriceDetailService.findCurrentPriceByCompanyCode(company.getStockCode());
+            BigDecimal currentPrice = stockPriceDetailServiceImpl.findCurrentPriceByCompanyCode(company.getStockCode());
 
             JSONObject dataJson = new JSONObject();
             dataJson.put("logo", logo);
@@ -76,7 +74,7 @@ public class CompanyController {
         company.setBriefWriteup(companyJson.getString("briefWriteup"));
         company.setLogo(companyJson.getString("logo"));
 
-        Company retCompany = companyService.createNewCompany(company);
+        Company retCompany = companyServiceImpl.createNewCompany(company);
         if(retCompany !=null ){
             jsonObject.put("data","success");
         }else{
@@ -90,7 +88,7 @@ public class CompanyController {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         String companySearchTxt = companyJson.getString("companySearchTxt");
-        List<Company> companies = companyService.searchCompany(companySearchTxt);
+        List<Company> companies = companyServiceImpl.searchCompany(companySearchTxt);
 
         for(Company company : companies){
             String companName = company.getCompanyName();
@@ -127,7 +125,7 @@ public class CompanyController {
         String periodUnit = stockPriceDetailJson.getString("periodUnit");
 
         List<Date> timeline = getTimeline(fromPeriod, toPeriod, periodSize, periodUnit);
-        List<StockPriceDetail>  stockPriceDetails = stockPriceDetailService.retrieveStockPriceDetails(companyName,stockExchangeName);
+        List<StockPriceDetail>  stockPriceDetails = stockPriceDetailServiceImpl.retrieveStockPriceDetails(companyName,stockExchangeName);
         for (StockPriceDetail stockPriceDetail : stockPriceDetails){
              java.sql.Date currentDate = stockPriceDetail.get_date();
              java.sql.Time currentTime = stockPriceDetail.get_time();
@@ -147,7 +145,7 @@ public class CompanyController {
     public JSONObject getCompanyNameByCompanyCode(@RequestBody JSONObject companyJson){
         JSONObject jsonObject = new JSONObject();
         String companyCode = companyJson.getString("companyCode");
-        Company company = companyService.findCompanyByStockCode(companyCode);
+        Company company = companyServiceImpl.findCompanyByStockCode(companyCode);
         jsonObject.put("companyName", company.getCompanyName());
         return jsonObject;
     }
@@ -180,5 +178,4 @@ public class CompanyController {
         }
         return timeline;
     }
-
 }
