@@ -6,7 +6,7 @@ import * as crypto from 'crypto-js'
 })
 export class EncryptService {
 
-  public serectKey: string = 'fsd'
+  public serectKey: string = 'ibmfullstackdeve'
 
   constructor() { }
 

@@ -27,6 +27,7 @@ export class SubmitPasswordComponent implements OnInit {
     )
   }
   signup() {
+    alert("signup")
     if (this.isPolicyAgreed && this.password == this.password2) {
       Axios.post('http://localhost:7001/user/signup/pwd',
       {
@@ -35,7 +36,7 @@ export class SubmitPasswordComponent implements OnInit {
       })
       .then(
         (response:any)=>{
-          this.router.navigateByUrl('user/signup')
+          this.router.navigateByUrl('/user/signin')
         }
       )
     } else {

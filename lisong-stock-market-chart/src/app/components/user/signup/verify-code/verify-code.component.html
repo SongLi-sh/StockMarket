@@ -9,7 +9,7 @@
                     <div class="input-group form-group">
                         <input type="text" name="prefixCode" class="form-control veriCode" [value]="prefixCode" readonly>
                         <span class="dash">————</span>
-                        <input type="text" name="suffixCode" class="form-control veriCode" [value]="suffixCode" autofocus required>
+                        <input type="text" name="suffixCode" class="form-control veriCode" [value]="suffixCode" [(ngModel)]="digit6" autofocus required>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Verify" class="btn float-right login_btn" (click)="verify()">

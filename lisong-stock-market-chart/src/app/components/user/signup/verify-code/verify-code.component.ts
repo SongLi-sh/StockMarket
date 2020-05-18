@@ -13,28 +13,30 @@ export class VerifyCodeComponent implements OnInit {
   public suffixCode : any 
   public prefixCode : any
   public digit6 : string =''
-  public placeholder : string = '6 gigits code'
+  public placeholder : string = '6 digits code'
 
   constructor(public router:Router,public activeRoute : ActivatedRoute, public encrptService: EncryptService) { }
 
   ngOnInit(): void {
     this.activeRoute.queryParams.subscribe(
       (params:any)=>{
-        let encryptedPrefixCode = params['prefixCode']
-        this.prefixCode = this.encrptService.aesDecrypt(encryptedPrefixCode)
+        //let encryptedPrefixCode = params['prefixCode']
+        //this.prefixCode = this.encrptService.aesDecrypt(encryptedPrefixCode)
+        this.prefixCode = params['prefixCode']
         
-        let encryptedSuffixCode = params['suffixCode']
-        this.suffixCode = this.encrptService.aesDecrypt(encryptedSuffixCode)
+        // let encryptedSuffixCode = params['suffixCode']
+        // this.suffixCode = this.encrptService.aesDecrypt(encryptedSuffixCode)
+        this.suffixCode = params['suffixCode']
         this.username = params['username']
       }
     )
   }
 
-  gigit6Focus(){
+  digit6Focus(){
     this.placeholder = ''
   }
 
-  gidit6Blur(){
+  didit6Blur(){
     this.placeholder = '6 gigits code'
   }
 
@@ -42,7 +44,7 @@ export class VerifyCodeComponent implements OnInit {
    if(this.digit6 == this.suffixCode){
     this.router.navigateByUrl(
       this.router.createUrlTree([
-        'user/signup/submitpassword'
+        '/user/signup/submitpassword'
       ],{
         queryParams:{
           'username':this.username

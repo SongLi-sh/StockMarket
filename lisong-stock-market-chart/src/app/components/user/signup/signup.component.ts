@@ -12,10 +12,10 @@ import axios from 'axios'
 
 export class SignupComponent implements OnInit {
   public username : string = ''
-  public placeholder:string = ''
+  public placeholder:string = 'email for signup...'
   public prefixCode:any
   public suffixCode:any
-  public encryptKey:string = 'fsd'
+  public encryptKey:string = 'ibmfullstackdeve'
 
 
   constructor( public router : Router,public encryptService: EncryptService, public emailValidationService: EmailValidationService) { }
@@ -36,16 +36,19 @@ export class SignupComponent implements OnInit {
       })
       .then(
         (response : any) => {
+          console.log(response)
+          alert("2")
           this.prefixCode = response.data.prefixCode
-          let encryptedPrefixCode = this.encryptService.aesEncrypt(this.prefixCode)
+         // let encryptedPrefixCode = this.encryptService.aesEncrypt(this.prefixCode)
           this.suffixCode = response.data.suffixCode
-          let encryptedSuffixCode = this.encryptService.aesEncrypt(this.suffixCode)
+         // let encryptedSuffixCode = this.encryptService.aesEncrypt(this.suffixCode)
+          alert("3")
           this.router.navigateByUrl(this.router.createUrlTree(
-            ['/user/veri/code'], 
+            ['/user/signup/verifycode'], 
             {queryParams: 
               {
-                'prefixCode': encryptedPrefixCode, 
-                'suffixCode': encryptedSuffixCode,
+                'prefixCode': this.prefixCode , 
+                'suffixCode': this.suffixCode,
                 'username': this.username
               }
             }), 
