@@ -15,7 +15,7 @@ public interface CompanyDao extends JpaRepository<Company, Long> {
     List<Company> findCompanyByCompanySearchTx(@Param("companySearchTxt") String companySearchTxt);
 
     Company findStockCodeByCompanyName(String companyName);
-    Company findCompanyByStockCode(String stockCode);
+    Company findCompanyNameByStockCode(String stockCode);
 
 
 }

@@ -17,7 +17,7 @@ export class SigninComponent implements OnInit {
   public password : string = ''
 
 
-  constructor(public router : Router) { }
+  constructor(public router : Router, public encrypteService: EncryptService, public httpService: HttpService) { }
 
   ngOnInit(): void {
   }
@@ -34,29 +34,56 @@ export class SigninComponent implements OnInit {
     loginWarn.css('color','red')
     return false
   }
-  if (this.username == 'normal' && this.password == '123') {
-    alert('normal user login pass')
 
-    this.router.navigateByUrl(
-      this.router.createUrlTree(
-        ['user/land'],
-        {
-          queryParams : {username : this.username}
+  axios
+  .post("http://localhost:7001/user/signin", {
+    username: this.username,
+    password: this.password
+  })
+  .then(
+    (response:any)=>{
+      if (response.data != null) {
+        console.log(response)
+
+        if (response.data.resetPwd == true) {
+          this.router.navigateByUrl(
+            this.router.createUrlTree(["/user/reset/pwd"], {
+              queryParams: {
+                username: this.username
+              }
+            })
+          );
         }
-        )
-    )
-  } 
-  if(this.username == 'admin' && this.password == '123') {
-    alert('admin usre login pass')
-    this.router.navigateByUrl(
-      this.router.createUrlTree(
-        ['admin/land'],
-        {
-          queryParams : {username : this.username}
+
+        if (response.data.userType == "admin") {
+          this.router.navigateByUrl(
+            this.router.createUrlTree(["/admin/land"], {
+              queryParams: {
+                username: this.username
+              }
+            })
+          );
         }
-        ) 
-    )
-  }
+
+        if (response.data.userType == "user") {
+          this.router.navigateByUrl(
+            this.router.createUrlTree(["/user/land"], {
+              queryParams: {
+                username: this.username
+              }
+            })
+          );
+        }
+
+
+      }
+
+    }
+
+  )
+  .catch(error => {
+          console.log(error);
+        });
 
   return false
   }

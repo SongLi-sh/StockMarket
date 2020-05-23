@@ -24,12 +24,17 @@ export class UserLandingPageComponent implements OnInit {
   constructor(public router : Router,public activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(
-      (params)=>{
-        this.username = params['username']
-      }
-    )
+    if (!this.username){
+      this.activatedRoute.queryParams.subscribe(
+        (params)=>{
+     
+          this.username = params['username']
+        }
+      )
+    }
+
   }
+
   companySearch(){
     axios.post("http://localhost:7002/company/search",
     {
@@ -46,6 +51,7 @@ export class UserLandingPageComponent implements OnInit {
       }
     )
   }
+
   updatePwd(){
     this.router.navigateByUrl(
       this.router.createUrlTree(
@@ -55,13 +61,17 @@ export class UserLandingPageComponent implements OnInit {
   }
   
   logout(){
+
     axios.post("http://localhost:7001/user/logout/",{
       username:this.username
     })
     .then(
-      (response:any)=>{
-        if(response.data.loginStatus){
-          this.router.navigateByUrl('user/signin')
+      (response:any) => {
+        console.log("logout response data:"+response.data)
+        console.log("loginStatus:"+response.data.loginStatus) 
+
+        if(!response.data.loginStatus){
+          this.router.navigateByUrl('/user/signin')
         }
       }
     )

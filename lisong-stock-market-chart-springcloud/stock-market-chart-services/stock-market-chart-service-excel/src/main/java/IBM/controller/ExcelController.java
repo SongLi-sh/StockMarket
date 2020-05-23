@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +24,7 @@ public class ExcelController {
     @Autowired
     private IExcelService excelService;
 
+    @PostMapping(value = "/import", consumes = "multipart/form-data")
     public JSONObject importExcel(@RequestParam(value = "file")MultipartFile file){
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
@@ -46,7 +48,7 @@ public class ExcelController {
             count++;
         }
         jsonObject.put("summaryOfUpload", jsonArray);
-        return null;
+        return jsonObject;
     }
 
 }

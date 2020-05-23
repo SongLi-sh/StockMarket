@@ -6,6 +6,7 @@ import axios from 'axios'
   templateUrl: './admin-upload-summary.component.html',
   styleUrls: ['./admin-upload-summary.component.css']
 })
+
 export class AdminUploadSummaryComponent implements OnInit {
   public companyName : any
   public stockExchange:any
@@ -38,4 +39,8 @@ export class AdminUploadSummaryComponent implements OnInit {
     this.toDate = localStorage.getItem("toDate")
   }
 
+  ok(){
+    this.isOKClicked = true
+    this.okClicked.emit(this.isOKClicked)
+  }
 }

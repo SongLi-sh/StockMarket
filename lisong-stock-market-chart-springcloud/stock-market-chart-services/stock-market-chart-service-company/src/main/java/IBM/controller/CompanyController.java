@@ -145,7 +145,7 @@ public class CompanyController {
     public JSONObject getCompanyNameByCompanyCode(@RequestBody JSONObject companyJson){
         JSONObject jsonObject = new JSONObject();
         String companyCode = companyJson.getString("companyCode");
-        Company company = companyServiceImpl.findCompanyByStockCode(companyCode);
+        Company company = companyServiceImpl.findCompanyNameByStockCode(companyCode);
         jsonObject.put("companyName", company.getCompanyName());
         return jsonObject;
     }

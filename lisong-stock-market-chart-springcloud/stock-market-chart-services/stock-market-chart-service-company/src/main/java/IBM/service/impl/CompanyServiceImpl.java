@@ -36,7 +36,7 @@ public class CompanyServiceImpl implements ICompanyService {
     }
 
     @Override
-    public Company findCompanyByStockCode(String stockCode) {
-        return companyDao.findCompanyByStockCode(stockCode);
+    public Company findCompanyNameByStockCode(String stockCode) {
+        return companyDao.findCompanyNameByStockCode(stockCode);
     }
 }
