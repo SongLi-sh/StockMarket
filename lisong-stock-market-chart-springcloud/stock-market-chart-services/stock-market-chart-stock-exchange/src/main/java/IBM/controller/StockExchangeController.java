@@ -5,14 +5,13 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import IBM.entity.StockExchange;
 import IBM.service.impl.StockExchangeServiceImpl;
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin(value = "http://localhost:4200")
-@Slf4j
 @RestController
 public class StockExchangeController {
 
