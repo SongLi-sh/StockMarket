@@ -9,7 +9,7 @@ import axios from 'axios'
 export class AdminStockExchangeCreateComponent implements OnInit {
   public stockExchangeName : string = ''
   public stockExchangeBrief : string = ''
-  public stockExhangeAddress : string = ''
+  public stockExchangeAddress : string = ''
   public stockExchangeRemarks : string = ''
 
   @Output() private stockExchangeSaved = new EventEmitter()
@@ -24,7 +24,7 @@ export class AdminStockExchangeCreateComponent implements OnInit {
       {
         stockExchangeName: this.stockExchangeName,
         stockExchangeBrief: this.stockExchangeBrief,
-        stockExhangeAddress: this.stockExhangeAddress,
+        stockExchangeAddress: this.stockExchangeAddress,
         stockExchangeRemarks: this.stockExchangeRemarks
       }
     )
@@ -42,4 +42,4 @@ export class AdminStockExchangeCreateComponent implements OnInit {
     )
   }
   
-}
+} 

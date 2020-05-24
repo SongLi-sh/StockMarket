@@ -55,10 +55,10 @@ create table if not exists `ibm_stock_market_chart`.`stock_price_detail`(
  unique key `key_stock_price_detail` (`company_code`,`stock_exchange`,`current_price`,`_date`,`_time`)
 )engine=innodb auto_increment=6 default charset=utf8 row_format=compact comment='stock price detail table';
 
--- IPOs planned
-drop table if exists `ibm_stock_market_chart`.`IPOs_planned`;
-create table if not exists `ibm_stock_market_chart`.`IPOs_planned`(
- `IPO_id` bigint(20) not null auto_increment comment 'IPO_id',
+-- ipos planned
+drop table if exists `ibm_stock_market_chart`.`ipos_planned`;
+create table if not exists `ibm_stock_market_chart`.`ipos_planned`(
+ `ipo_id` bigint(20) not null auto_increment comment 'ipo_id',
  `company_name` varchar(128) not null default '' comment 'company_name',
  `stock_exchange` varchar(128) not null default '' comment 'stock_exchange',
  `price_per_share` decimal(10,2) default 0 not null comment 'price_per_share',
@@ -67,9 +67,9 @@ create table if not exists `ibm_stock_market_chart`.`IPOs_planned`(
  `remarks` varchar(128) default '' comment 'remarks',
  `create_date` datetime not null default '1970-01-01 08:00:00' comment 'create_date',
  `update_date` datetime not null default '1970-01-01 08:00:00' comment 'update_date',
- primary key(`IPO_id`),
+ primary key(`ipo_id`),
  unique key `key_ipo_planned` (`company_name`,`stock_exchange`,`price_per_share`,`total_no_of_shares`,`open_date_time`)
-)engine=innodb auto_increment=6 default charset=utf8 row_format=compact comment='IPOs planned table';
+)engine=innodb auto_increment=6 default charset=utf8 row_format=compact comment='ipos planned table';
 
 -- sector
 create table if not exists `ibm_stock_market_chart`.`sector`(

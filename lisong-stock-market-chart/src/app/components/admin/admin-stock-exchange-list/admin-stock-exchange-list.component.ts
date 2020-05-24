@@ -7,7 +7,7 @@ import axios from 'axios'
   styleUrls: ['./admin-stock-exchange-list.component.css']
 })
 export class AdminStockExchangeListComponent implements OnInit {
-  public stockExchangeList : any[] =[]
+  public stockExchanges : any[] =[]
   @Output() private newStockExchangeClicked = new EventEmitter()
 
 
@@ -17,7 +17,8 @@ export class AdminStockExchangeListComponent implements OnInit {
     axios.get('http://localhost:7004/stock-exchange/list')
     .then(
       (response:any)=>{
-      this.stockExchangeList = response.date.stockExchanges
+        console.log("StockExchange Data:"+this.stockExchanges)
+      this.stockExchanges = response.data.stockExchanges
     })
     .catch(
       (error)=>{
