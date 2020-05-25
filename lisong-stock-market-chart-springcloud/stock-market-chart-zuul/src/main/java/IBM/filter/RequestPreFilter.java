@@ -1,10 +1,10 @@
 package IBM.filter;
 
 import com.netflix.zuul.ZuulFilter;
-        import com.netflix.zuul.exception.ZuulException;
-        import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
+import com.netflix.zuul.exception.ZuulException;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 
-public class RequestPrefilter extends ZuulFilter {
+public class RequestPreFilter extends ZuulFilter {
     @Override
     public String filterType() {
         return FilterConstants.PRE_TYPE;
