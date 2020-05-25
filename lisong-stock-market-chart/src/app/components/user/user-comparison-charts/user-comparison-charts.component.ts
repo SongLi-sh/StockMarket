@@ -65,7 +65,7 @@ export class UserComparisonChartsComponent implements OnInit {
     this.myChart = echarts.init(main)
 
     axios.post("http://localhost:7002/company/compare",{
-      compnanyName: this.selectedCompanyName,
+      companyName: this.selectedCompanyName,
       selectedStockExchangeName: this.selectedStockExchangeName,
       fromPeriod: this.fromPeriod,
       toPeriod: this.toPeriod,
@@ -153,7 +153,7 @@ export class UserComparisonChartsComponent implements OnInit {
     this.timeline = this.timeline.slice(this.timeline.length+1)
     this.priceStack = this.priceStack.slice(this.priceStack.length+1)
     axios.post("http://localhost:7002/company/compare",{
-      compnanyName: this.selectedCompanyName,
+      companyName: this.selectedCompanyName,
       selectedStockExchangeName: this.selectedStockExchangeName,
       fromPeriod: this.fromPeriod,
       toPeriod: this.toPeriod,

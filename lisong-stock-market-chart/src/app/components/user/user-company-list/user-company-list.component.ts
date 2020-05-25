@@ -19,7 +19,7 @@ export class UserCompanyListComponent implements OnInit {
       (response:any)=>{
         for (let json of response.data.companies){
           let tmpJson = {
-            compayName: json.compayName,
+            companyName: json.companyName,
             turnOver:json.turnOver,
             CEO:json.CEO,
             boardChairman: json.boardChairman,
@@ -42,7 +42,7 @@ export class UserCompanyListComponent implements OnInit {
     this.companyList = this.companyList.slice(this.companyList.length+1)
     for (let json of this.searchResults){
       let tmpJson = {
-        compayName: json.compayName,
+        companyName: json.companyName,
         turnOver:json.turnOver,
         CEO:json.CEO,
         boardChairman: json.boardChairman,

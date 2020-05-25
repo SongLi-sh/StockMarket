@@ -9,7 +9,7 @@ import axios from 'axios'
 })
 export class UserLandingPageComponent implements OnInit {
   public username : string = ''
-  public companySearchText = ''
+  public companySearchTxt = ''
   public searchResults : any[] = []
   public suggestResults : any[] = []
   public promptShow : boolean = false
@@ -22,12 +22,10 @@ export class UserLandingPageComponent implements OnInit {
   public searchTxtReadonly: boolean = false
 
   constructor(public router : Router,public activatedRoute: ActivatedRoute) { }
-
   ngOnInit(): void {
     if (!this.username){
       this.activatedRoute.queryParams.subscribe(
         (params)=>{
-     
           this.username = params['username']
         }
       )
@@ -38,7 +36,7 @@ export class UserLandingPageComponent implements OnInit {
   companySearch(){
     axios.post("http://localhost:7002/company/search",
     {
-      companySearchText: this.companySearchText
+      companySearchTxt: this.companySearchTxt
     })
     .then(
       (response:any)=>{
@@ -119,7 +117,7 @@ export class UserLandingPageComponent implements OnInit {
     this.ipoShow = false 
   }
   promptClick(key){
-    this.companySearchText = this.suggestResults[key].companyName
+    this.companySearchTxt = this.suggestResults[key].companyName
     this.companySearch()
     this.promptShow = false
 

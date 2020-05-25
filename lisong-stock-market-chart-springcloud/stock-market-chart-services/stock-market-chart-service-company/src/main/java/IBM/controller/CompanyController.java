@@ -91,7 +91,7 @@ public class CompanyController {
         List<Company> companies = companyServiceImpl.searchCompany(companySearchTxt);
 
         for(Company company : companies){
-            String companName = company.getCompanyName();
+            String companyName = company.getCompanyName();
             String CEO = company.getCEO();
             String boardChairman = company.getBoardChairman();
             BigDecimal turnover = company.getTurnover();
@@ -99,7 +99,7 @@ public class CompanyController {
             String briefWriteup = company.getBriefWriteup();
             String logo = company.getLogo();
             JSONObject dataJson = new JSONObject();
-            dataJson.put("companyName", companName);
+            dataJson.put("companyName", companyName);
             dataJson.put("CEO", CEO);
             dataJson.put("boardChairman", boardChairman);
             dataJson.put("turnOver", turnover);
@@ -117,7 +117,7 @@ public class CompanyController {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         String companyName = stockPriceDetailJson.getString("companyName");
-        String stockExchangeName = stockPriceDetailJson.getString("stockExchangeName");
+        String stockExchangeName = stockPriceDetailJson.getString("selectedStockExchangeName");
 
         Date fromPeriod = stockPriceDetailJson.getDate("fromPeriod");
         Date toPeriod = stockPriceDetailJson.getDate("toPeriod");
