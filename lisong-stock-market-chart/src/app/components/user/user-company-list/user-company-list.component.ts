@@ -14,7 +14,8 @@ export class UserCompanyListComponent implements OnInit {
 
   ngOnInit(): void {
     this.companyList = this.companyList.slice(this.companyList.length+1)
-    axios.get("http://localhost:7002/company/list")
+    //axios.get("http://localhost:7002/company/list")
+    axios.get("http://localhost:9000/ibm/company/list")
     .then(
       (response:any)=>{
         for (let json of response.data.companies){

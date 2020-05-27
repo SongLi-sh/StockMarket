@@ -34,7 +34,8 @@ export class UserLandingPageComponent implements OnInit {
   }
 
   companySearch(){
-    axios.post("http://localhost:7002/company/search",
+    // axios.post("http://localhost:7002/company/search",
+    axios.post("http://localhost:9000/ibm/company/search",
     {
       companySearchTxt: this.companySearchTxt
     })
