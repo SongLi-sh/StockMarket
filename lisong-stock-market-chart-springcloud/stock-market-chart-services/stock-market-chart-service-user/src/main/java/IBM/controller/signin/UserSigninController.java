@@ -6,7 +6,9 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(value = "http://localhost:4200")
+//@CrossOrigin(value = "http://localhost:4200")
+//@CrossOrigin(value = "http://172.17.0.1:4200")
+@CrossOrigin(value = "*")
 @RestController
 public class UserSigninController {
     @Autowired
