@@ -1,6 +1,5 @@
 package IBM.controller;
 
-import jdk.internal.org.jline.utils.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSONObject;
@@ -51,7 +50,6 @@ public class MailController {
 
     @PostMapping(value = "/thymeleaf/reset/pwd")
     public JSONObject sendThymeleafMailTmpPwd(@RequestBody JSONObject userJson){
-        Log.info(userJson.getString("username"));
         MailBean mailBean = new MailBean();
         mailBean.setSubject("[NEED YOU KNOW]Here is your tmp pwd for your account");
         mailBean.setReceiver(userJson.getString("username"));
