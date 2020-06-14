@@ -21,4 +21,4 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://127.0.0.1:8001/eureka/
+      defaultZone: http://host.docker.internal:8001/eureka/
