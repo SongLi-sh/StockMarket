@@ -2,20 +2,18 @@
 The project hierarchy is clarified below：
 
 liosng-stock-market-chart-springcloud #(root module)
---stock-market-chart-euraka   # level-1 submodule
---stock-market-chart-zuul     # level-1 submodule
---stock-market-chart-services # level-1 submodule
-  --stock-market-chart-service-common   # level-2 submodule
-  --stock-market-chart-service-company  # level-2 submodule
-  --stock-market-chart-service-excel    # level-2 submodule
-  --stock-market-chart-service-mail     # level-2 submodule
-  --stock-market-chart-service-sector   # level-2 submodule
-  --stock-market-chart-service-security # level-2 submodule
-  --stock-market-chart-service-user     # level-2 submodule
-  --stock-market-chart-service-exchange # level-2 submodule
-  
-  
-  
++ stock-market-chart-euraka   
++ stock-market-chart-zuul     
++ stock-market-chart-services 
+  + stock-market-chart-service-common   
+  + stock-market-chart-service-company  
+  + stock-market-chart-service-excel
+  + stock-market-chart-service-mail    
+  + stock-market-chart-service-sector   
+  + stock-market-chart-service-security 
+  + stock-market-chart-service-user     
+  + stock-market-chart-service-exchange
+ 
   
   The below are the command the dockerlise the user service
   1)docker build -t lisongandy/stock-market-chart-service-user .
