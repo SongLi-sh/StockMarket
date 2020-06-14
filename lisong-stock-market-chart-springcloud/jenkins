@@ -1,0 +1,23 @@
+node {
+   stage('git clone') {
+     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'StockMarket', url: 'https://github.com/SongLi-sh/StockMarket.git']]])
+   }
+   stage('Build') {
+           env.JAVA_HOME="${tool 'jdk1.8.0_251'}"
+           withMaven(
+            maven: 'maven',
+            mavenLocalRepo: '.repository') {
+                sh "mvn clean install -Dmaven.test.skip=true"
+        }
+   }
+   stage('deploy') {
+    sshagent(credentials: ['deploy_ssh_key']) {
+        sh 'ssh root@127.0.0.1'
+        sh 'cd /Users/songli/Study/StockMarket/lisong-stock-market-chart-springcloud/stock-market-chart-services/stock-market-chart-service-user'
+        sh 'docker build -t lisongandy/stock-market-chart-service-user .'
+        sh ''
+        sh 'docker run lisongandy/stock-market-chart-service-user -e AUTHOR="lisong" d -p 7001:7001 lisongandy/stock-market-chart-service-user'
+        sh 'echo hello user service deployment done'
+     }
+   }
+}
